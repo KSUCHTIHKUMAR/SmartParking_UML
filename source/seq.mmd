@@ -1,0 +1,28 @@
+sequenceDiagram
+autonumber
+actor Driver
+participant App as Mobile App
+participant RS as Reservation Service
+participant PS as ParkingSpot
+participant PG as Payment Gateway
+participant N as Notification Service
+Driver->>App: Select spot & time
+App->>RS: reserveSpot(spotId, time)
+RS->>PS: checkAvailability()
+PS-->>RS: Available
+RS->>PS: setStatus(Reserved)
+RS-->>App: Reservation created (amount due)
+App-->>Driver: Show payment screen
+Driver->>App: Enter payment details
+App->>PG: processPayment(amount)
+alt Payment successful
+PG-->>App: Success
+App->>RS: confirmReservation()
+RS->>N: sendConfirmation()
+N-->>Driver: Booking confirmed + directions
+else Payment failed
+PG-->>App: Failure
+App->>RS: cancelReservation()
+RS->>PS: setStatus(Available)
+App-->>Driver: Payment failed, try again
+end

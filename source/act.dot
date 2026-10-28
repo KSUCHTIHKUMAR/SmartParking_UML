@@ -1,0 +1,12 @@
+digraph G{rankdir=TB;nodesep=0.35;ranksep=0.7;newrank=true;
+node[fontname=Helvetica,fontsize=13,shape=box,style="rounded,filled",fillcolor="#e8f1ff",width=1.6];edge[fontname=Helvetica,fontsize=11];
+s[shape=circle,label="",width=0.25,style=filled,fillcolor=black];
+z[shape=doublecircle,label="",width=0.25,style=filled,fillcolor=black];
+c[shape=diamond,label="Spot\navailable?",fillcolor="#fff3d6"];f[shape=diamond,label="Payment\nsuccessful?",fillcolor="#fff3d6"];
+a[label="Open app,\nsearch parking"];b[label="View real-time\navailability"];d[label="Select and\nreserve spot"];e[label="Make payment"];
+g[label="Receive confirmation\nand directions"];h[label="Drive to lot;\nsensor detects\narrival"];j[label="Spot = Occupied;\ndriver parks"];
+l[label="Driver leaves;\nsensor detects\ndeparture"];n[label="Spot = Available;\nbill closed;\nreceipt sent"];
+{rank=same;s;a;b;c}{rank=same;g;f;e;d}{rank=same;h;j;l;n;z}
+s->a->b->c;c->d[label=" Yes"];d->e;e->f;f->g[label=" Yes"];g->h;h->j->l->n->z;
+c->b[label=" No",constraint=false,tailport=n,headport=n];f->e[label=" No",constraint=false,tailport=s,headport=s];
+}

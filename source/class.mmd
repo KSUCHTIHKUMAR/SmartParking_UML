@@ -1,0 +1,70 @@
+classDiagram
+direction LR
+class User{
++int userId
++String name
++String email
++String phone
++login()
++register()
+}
+class Driver{
++String vehicleNo
++searchSpots()
++reserveSpot()
++makePayment()
+}
+class Admin{
++String role
++addSpot()
++removeSpot()
++viewAnalytics()
+}
+class ParkingSpot{
++int spotId
++String location
++String type
++SpotStatus status
++updateStatus()
++isAvailable()
+}
+class Sensor{
++int sensorId
++boolean carDetected
++DateTime lastUpdated
++detectPresence()
++sendUpdate()
+}
+class Reservation{
++int reservationId
++DateTime startTime
++DateTime endTime
++String status
++create()
++cancel()
++extend()
+}
+class Payment{
++int paymentId
++double amount
++String method
++String status
++DateTime paidAt
++process()
++refund()
+}
+class Notification{
++int notifId
++String message
++DateTime sentAt
++send()
+}
+User <|-- Driver
+User <|-- Admin
+Driver "1" --> "0..*" Reservation : makes
+Reservation "0..*" --> "1" ParkingSpot : books
+ParkingSpot "1" -- "1" Sensor : monitored by
+Reservation "1" --> "1" Payment : paid by
+Admin "1" --> "0..*" ParkingSpot : manages
+User "1" --> "0..*" Notification : receives
+Sensor ..> Notification : triggers

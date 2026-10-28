@@ -1,0 +1,9 @@
+stateDiagram-v2
+direction LR
+[*] --> Available
+Available --> Reserved : reserve + pay
+Reserved --> Occupied : car arrives
+Occupied --> Available : car leaves
+Reserved --> Available : cancel / timeout
+Available --> OutOfService : fault / admin
+OutOfService --> Available : re-enabled

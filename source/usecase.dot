@@ -1,0 +1,14 @@
+digraph G{rankdir=LR;node[fontname=Helvetica,fontsize=12];
+subgraph cluster_0{label="Smart Parking System";style=rounded;fontname="Helvetica-Bold";
+node[shape=ellipse,style=filled,fillcolor="#e8f1ff"];
+u1[label="Search Available Spots"];u2[label="Reserve Spot"];u3[label="Make Payment"];u4[label="Get Directions"];u5[label="Receive Real-time Alerts"];u6[label="Manage Spot Inventory"];u7[label="View Usage Analytics"];u8[label="Monitor Spots"];u9[label="Detect Car Presence"];u10[label="Cancel Reservation"];
+}
+node[shape=box,style=filled,fillcolor="#fff3d6"];
+D[label="«actor»\nDriver"];A[label="«actor»\nAdmin"];S[label="«actor»\nSensor"];P[label="«actor»\nPayment Gateway"];
+edge[arrowhead=none];
+D->u1;D->u2;D->u3;D->u4;D->u5;D->u10;
+A->u6;A->u7;A->u8;
+S->u9;P->u3;
+edge[arrowhead=open,style=dashed,fontname=Helvetica,fontsize=10];
+u2->u3[label="«include»"];u9->u5[label="«extend»"];u8->u9[label="«include»"];
+}
